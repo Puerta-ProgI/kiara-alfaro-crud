@@ -10,5 +10,6 @@ router.get(url+'/', mainController.apiHome);
 
 router.get(url+'/productos', mainController.apiProducts);
 router.get(url+'/productos'+'/:id', mainController.apiProductDetail);
+router.post(url+'/productos', mainController.apiCreateProduct);
 
 module.exports = router;
