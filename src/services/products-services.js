@@ -18,6 +18,27 @@ const service ={
         })
 
         return panAEnviar || {}
+    },
+
+    create: (data)=>{
+
+
+        let panACrear={
+
+            id:panes[panes.length-1].id+1,
+            name: data.name,
+            desc:data.description
+
+        }
+
+        panes.push(panACrear)
+    },
+
+    delete: (id)=>{
+
+        let panesFiltrados= panes.filter((pan)=>pan.id != id)
+        panes= panesFiltrados;
+        return panes
     }
 }
 

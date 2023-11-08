@@ -25,8 +25,16 @@ const controller = {
     },
     apiCreateProduct:(req,res) => {
 
-       res.send(req.body)
+      products.create(req.body);
+      res.redirect("/api/productos");
+
 
     },
+    apiProductDelete: (req,res) =>{
+
+        products.delete(req.params.id)
+        res.redirect("/api/productos");
+
+    }
 }
 module.exports = controller;
