@@ -11,15 +11,15 @@ const controller = {
             productos: baseUrl + url + "/productos",
         });
     },
-    apiProducts: (req,res) => {
+    apiProducts: async (req,res) => {
         
-        let panes= products.listarPanes()
+        let panes= await products.listarPanes()
         res.send(panes);
 
     },
-    apiProductDetail: (req,res) => {
+    apiProductDetail: async (req,res) => {
         const id = req.params.id;
-       let panAEnviar=products.buscarPan(id)
+       let panAEnviar= await products.buscarPan(id)
 
         res.send(panAEnviar || {});
     },

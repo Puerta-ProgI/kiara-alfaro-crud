@@ -1,23 +1,32 @@
 let panes = require("../data/panes");
-
+let db= require("../dataBase/models")
 
 
 const service ={
 
-    listarPanes: ()=>{
+    listarPanes: async()=>{
+        
+        let products = await db.Products.findAll();
+        return products
 
-        return panes
     },
 
-    buscarPan: (id)=>{
+    buscarPan: async (id)=>{
 
-        let panes = service.listarPanes();
+       // let panes = service.listarPanes();
 
-        let panAEnviar = panes.find((pan) => {
-            return pan.id == id;
+        //let panAEnviar = await panes.find((pan) => {
+          //  return pan.id == id;
+        //})
+
+        //return panAEnviar || {}
+
+        let pan = await db.Products.findOne({
+
+            where:{ id:id}
         })
 
-        return panAEnviar || {}
+        return pan ;
     },
 
     create: (data)=>{
