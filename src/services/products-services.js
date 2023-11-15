@@ -29,25 +29,57 @@ const service ={
         return pan ;
     },
 
-    create: (data)=>{
+    findById: async(id) =>{
+
+        let products=await db.Products.findOne({
+            where:{
+                id:id
+            }
+        });
+        return products
+    },
+
+    create: async (data)=>{
 
 
         let panACrear={
 
-            id:panes[panes.length-1].id+1,
+            //id:panes[panes.length-1].id+1,
             name: data.name,
-            desc:data.description
+            description:data.description
 
         }
 
-        panes.push(panACrear)
+       // panes.push(panACrear)
+       db.Products.create(panACrear)
     },
 
-    delete: (id)=>{
+    delete: async (id)=>{
 
-        let panesFiltrados= panes.filter((pan)=>pan.id != id)
-        panes= panesFiltrados;
-        return panes
+     //   let panesFiltrados= panes.filter((pan)=>pan.id != id)
+       // panes= panesFiltrados;
+
+        db.Products.destroy({
+
+            where:{ id:id}
+        })
+        //return panes
+    },
+
+    update:async(data,id) =>{
+
+        let panAEditar={
+
+            name: data.name,
+            description:data.description
+
+        }
+        db.Products.update(panAEditar,{
+            where:{
+                id:id
+            }
+        })
+
     }
 }
 

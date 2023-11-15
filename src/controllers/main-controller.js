@@ -1,10 +1,14 @@
+const path=require ('path');
 const products= require("../services/products-services")
 let baseUrl = "http://localhost:3031"
 let url = '/api'
 
 const controller = {
     home: (req, res) => {
-        res.redirect(url);
+
+        //res.redirect(url);
+        let filepath = path.resolve(__dirname, '../views/home.html')
+        res.sendFile(filepath)
     },
     apiHome: (req,res) => {
         res.send({
@@ -23,16 +27,23 @@ const controller = {
 
         res.send(panAEnviar || {});
     },
-    apiCreateProduct:(req,res) => {
+    apiCreateProduct:async (req,res) => {
 
-      products.create(req.body);
+     await products.create(req.body);
       res.redirect("/api/productos");
 
 
     },
-    apiProductDelete: (req,res) =>{
+    apiProductUpdate:async (req,res) => {
 
-        products.delete(req.params.id)
+        await products.update(req.body,req.params.id);
+         res.redirect("/api/productos");
+   
+   
+       },
+    apiProductDelete: async (req,res) =>{
+
+       await products.delete(req.params.id)
         res.redirect("/api/productos");
 
     }
